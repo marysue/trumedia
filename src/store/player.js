@@ -1,14 +1,14 @@
 import { apiToken } from '../config';
 
-export const SET_PLAYERS_INFO = 'players/playersInfoList';
+export const SET_PLAYER_LIST = 'players/playersListList';
 export const SET_PLAYER_STATS = 'players/playerStats';
-export const REMOVE_PLAYERS_INFO = 'players/playersInfoList/remove';
+export const REMOVE_PLAYER_LIST = 'players/playersListList/remove';
 export const REMOVE_PLAYER_STATS = 'players/playerStats/remove';
 
 //actions
-export const setPlayersInfo = playersInfo => ({ type: SET_PLAYERS_INFO, playersInfo });
+export const setPlayerList = playerList => ({ type: SET_PLAYER_LIST, playerList });
 export const setPlayerStats = playerStats => ({ type: SET_PLAYER_STATS, playerStats });
-export const removePlayersInfo = () => ( { type: REMOVE_PLAYERS_INFO} );
+export const removeplayersList = () => ( { type: REMOVE_PLAYER_LIST} );
 export const removePlayerStats = (id) => ({ type: REMOVE_PLAYER_STATS, id });
 
 //reducers
@@ -18,25 +18,23 @@ export const removePlayerStats = (id) => ({ type: REMOVE_PLAYER_STATS, id });
 //       { }, { }, { ... }, ... ]
 export default function reducer(state={}, action) {
     switch (action.type) {
-        case SET_PLAYERS_INFO: {
+        case SET_PLAYER_LIST: {
             const newState = {...state};
             //add the players info
             //assume NO player info exists, as this will wipe out the old players info
-            newState.playersInfo = [...action.playersInfo]
-            console.log("After adding playserInfo. newState:  ", newState);
-            console.log("After adding playersInfo. newState.playersInfo:  ", newState.playersInfo);
+            newState.playerList = action.playerList
             return newState;
         }
-        case REMOVE_PLAYERS_INFO: {
+        case REMOVE_PLAYER_LIST: {
             const newState = { ...state };
-            delete newState.playersInfo;
+            delete newState.playerList;
             console.log("After removing players info, state: ", newState);
             return newState
         }
         case SET_PLAYER_STATS: {
             const newState = {...state }
             console.log("Reducer: playerStats:  ", action.playerStats);
-            newState.playerStats = { id: action.playerStats[0].id, playerStats: [...action.playerStats] }
+            newState.playerStats = action.playerStats;
             return newState
         }
         case REMOVE_PLAYER_STATS: {
@@ -83,7 +81,7 @@ export const fetchPlayersList = async () => {
             //headers: { 'Content-Type': 'application/json', 'temptoken': `${apiToken}`, },
             headers: { 'Content-Type': 'application/json', 'temptoken': 'a8d2525e-d48b-4a7c-85d7-dc9f9bbe36ca' },
         });
-        console.log("Received:  ", response);
+
         if (response.ok) {
             return await response.json();
         } else {
@@ -378,7 +376,7 @@ export const fetchPlayerStats = async (id) => {
             // headers: { 'Content-Type': 'application/json', 'temptoken': `${apiToken}` },
             headers: { 'Content-Type': 'application/json', 'temptoken': 'a8d2525e-d48b-4a7c-85d7-dc9f9bbe36ca' },
         });
-        console.log("Received:  ", response);
+
         if (response.ok) {
             return await response.json();
         } else {
