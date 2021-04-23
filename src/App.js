@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchPlayersList, setPlayerList, setPlayerStats, fetchPlayerStats } from './store/player';
 import Graph1 from './components/graph1';
-
+import NavigationHeader from './components/NavigationHeader';
 function App() {
   const dispatch = useDispatch();
 
@@ -26,6 +26,7 @@ function App() {
   });
   return (
     <div className="App">
+      <NavigationHeader></NavigationHeader>
      <Graph1></Graph1>
     </div>
   );
