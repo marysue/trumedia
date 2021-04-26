@@ -22,7 +22,6 @@ export default function reducer(state={}, action) {
         case REMOVE_API_TOKEN: {
             const newState = { ...state };
             delete newState.apiToken;
-            console.log("After removing players info, state: ", newState);
             return newState
         }
         case SET_API_EXPIRATION: {
@@ -58,5 +57,3 @@ export const getApiToken = async () => {
 
     }
   }
-
-

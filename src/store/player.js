@@ -32,19 +32,16 @@ export default function reducer(state={}, action) {
         case REMOVE_PLAYER_LIST: {
             const newState = { ...state };
             delete newState.playerList;
-            console.log("After removing players info, state: ", newState);
             return newState
         }
         case SET_PLAYER_STATS: {
             const newState = {...state }
-            console.log("Reducer: playerStats:  ", action.playerStats);
             newState.playerStats = action.playerStats;
             return newState
         }
         case REMOVE_PLAYER_STATS: {
             const newState = {...state}
             delete newState.playerStats[action.id]
-            console.log("After removing a player stats for player id:  ", action.id, ":  ", newState.playerStats);
             return newState;
         }
         default: return state;
@@ -84,7 +81,6 @@ export const fetchPlayerList = async () => {
 
          const apiToken = await getApiToken();
 
-        console.log("apiToken: ", apiToken);
         const response = await fetch(`https://project.trumedianetworks.com/api/nfl/players`, {
             method: 'get',
             headers: { 'Content-Type': 'application/json', 'temptoken': `${apiToken.token}`, },

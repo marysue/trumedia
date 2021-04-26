@@ -12,10 +12,8 @@ const Graph1 = () => {
     const [playerInfo, setPlayerInfo] = useState(null);
 
     useEffect ( () => {
-        console.log("PlayerId:  ", playerId);
         (async () => {
             const response = await fetchPlayerStats(playerId);
-            console.log("PlayerInfo:  ", response);
             setPlayerInfo(response);
 
 
@@ -80,7 +78,7 @@ const Graph1 = () => {
 
         const columns = prepareColumnsForTable();
         const data = prepareDataForTable();
-        console.log("playerInfo:  ", playerInfo);
+
         return (
             <>
              {/* <div> Player Id:  { playerInfo[0].playerId } */}

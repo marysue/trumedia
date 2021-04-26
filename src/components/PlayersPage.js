@@ -6,7 +6,6 @@ import ReactTooltip from 'react-tooltip';
 
 const PlayersPage = () => {
     const players = useSelector(state => state.player.playerList);
-    console.log("PlayersPage displaying.");
     if (players) {
     return(
 
