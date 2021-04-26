@@ -1,35 +1,58 @@
-import logo from './logo.svg';
 import './App.css';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchPlayersList, setPlayerList, setPlayerStats, fetchPlayerStats } from './store/player';
-import Graph1 from './components/graph1';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+
+
+import { fetchPlayerList, setPlayerList } from './store/player';
 import NavigationHeader from './components/NavigationHeader';
+import NavigationFooter from './components/NavigationFooter';
+import PlayersPage from './components/PlayersPage';
+import Graph1 from './components/graph1';
+
 function App() {
+  const playerList = useSelector(state => state.player.playerList);
+  const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const playersStatsArr = [];
-    (async () => {
-      const playerList = await fetchPlayersList();
-      dispatch(setPlayerList(playerList));
+  useEffect( () => {
+    setLoaded(true);
+    (async() => {
+      if (!playerList) {
+       const pl = await fetchPlayerList();
+      dispatch(setPlayerList(pl));
 
-      for (let i = 0; i < playerList.length; i++) {
-        const playerStats = await fetchPlayerStats(playerList[i].playerId);
-        playersStatsArr.push({id: playerStats[i].playerId, stats: playerStats});
       }
-      console.log("App.js:  playerStatsArr:  ", playersStatsArr);
-      dispatch(setPlayerStats(playersStatsArr));
-
     })();
+  }, [dispatch, playerList]);
 
-  });
+  if (!loaded) {
+    return "Not loaded...";
+  } else if (!playerList) {
+    return "PlayerList is empty";
+   } else  {
   return (
     <div className="App">
-      <NavigationHeader></NavigationHeader>
-     <Graph1></Graph1>
+      <BrowserRouter>
+        <NavigationHeader></NavigationHeader>
+          <Switch>
+
+            <Route
+              path="/"
+              exact
+              render={ () => ( <PlayersPage /> )}
+              />
+            <Route
+              path="/statistics/:id"
+              render={ () => ( <Graph1 /> )}
+            />
+          </Switch>
+          <NavigationFooter></NavigationFooter>
+        </BrowserRouter>
     </div>
   );
 }
+}
+
 
 export default App;

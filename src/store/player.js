@@ -1,4 +1,5 @@
-import { apiToken } from '../config';
+
+import { getApiToken } from './api';
 
 export const SET_PLAYER_LIST = 'players/playersListList';
 export const SET_PLAYER_STATS = 'players/playerStats';
@@ -22,6 +23,9 @@ export default function reducer(state={}, action) {
             const newState = {...state};
             //add the players info
             //assume NO player info exists, as this will wipe out the old players info
+            if (newState.playerList) {
+              delete newState.playerList
+            }
             newState.playerList = action.playerList
             return newState;
         }
@@ -73,17 +77,23 @@ export default function reducer(state={}, action) {
   ]
 */
 
-export const fetchPlayersList = async () => {
+
+
+export const fetchPlayerList = async () => {
     try {
-        //console.log("apiToken:  ", apiToken);
+
+         const apiToken = await getApiToken();
+
+        console.log("apiToken: ", apiToken);
         const response = await fetch(`https://project.trumedianetworks.com/api/nfl/players`, {
             method: 'get',
-            //headers: { 'Content-Type': 'application/json', 'temptoken': `${apiToken}`, },
-            headers: { 'Content-Type': 'application/json', 'temptoken': 'a8d2525e-d48b-4a7c-85d7-dc9f9bbe36ca' },
+            headers: { 'Content-Type': 'application/json', 'temptoken': `${apiToken.token}`, },
+           // headers: { 'Content-Type': 'application/json', 'temptoken': 'a8d2525e-d48b-4a7c-85d7-dc9f9bbe36ca' },
         });
 
         if (response.ok) {
             return await response.json();
+
         } else {
             throw response.status
         }
@@ -371,10 +381,11 @@ export const fetchPlayersList = async () => {
 */
 export const fetchPlayerStats = async (id) => {
     try {
+        const apiToken = await getApiToken();
         const response = await fetch (`https://project.trumedianetworks.com/api/nfl/player/${id}`, {
             method: 'get',
-            // headers: { 'Content-Type': 'application/json', 'temptoken': `${apiToken}` },
-            headers: { 'Content-Type': 'application/json', 'temptoken': 'a8d2525e-d48b-4a7c-85d7-dc9f9bbe36ca' },
+            headers: { 'Content-Type': 'application/json', 'temptoken': `${apiToken.token}`, },
+            //headers: { 'Content-Type': 'application/json', 'temptoken': 'a8d2525e-d48b-4a7c-85d7-dc9f9bbe36ca' },
         });
 
         if (response.ok) {

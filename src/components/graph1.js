@@ -1,15 +1,32 @@
-import React from 'react';
-import {  useSelector  } from 'react-redux';
+import { useEffect, useState } from 'react';
+import {  useDispatch  } from 'react-redux';
 import ReactTable from 'react-table-6';
 import styles from 'react-table-6/react-table.css';
+import { useLocation } from 'react-router-dom';
+import { fetchPlayerStats, setPlayerStats } from '../store/player';
+
 
 const Graph1 = () => {
-   const playerInfo = useSelector(state => state.player.playerStats);
-   console.log("playerInfo in graph1 is:  ", playerInfo);
+    //const dispatch = useDispatch();
+    const location = useLocation()
+    const playerId = location.pathname.slice(12);
+    const [playerInfo, setPlayerInfo] = useState(null);
+
+    useEffect ( () => {
+        console.log("PlayerId:  ", playerId);
+        (async () => {
+            const response = await fetchPlayerStats(playerId);
+            console.log("PlayerInfo:  ", response);
+            setPlayerInfo(response);
+
+
+        })();
+
+    }, [playerId]);
 
    function prepareDataForTable() {
 
-        const stats = playerInfo[0].stats;
+        const stats = playerInfo
         let data = stats.map( (stat) => {
             return ({
                 week: stat.week,
@@ -47,25 +64,29 @@ const Graph1 = () => {
         ]
         return columns;
     }
+    if (playerInfo) {
 
+        const columns = prepareColumnsForTable();
+        const data = prepareDataForTable();
+        console.log("playerInfo:  ", playerInfo);
+        return (
+            <>
+             <div> Player Id:  { playerInfo[0].playerId }
+                     <p>Name:  {playerInfo[0].fullName}</p>
+                     <img src={playerInfo[0].playerImage} alt="playerImage"/>
+                     <img src={playerInfo[0].teamImage} alt="teamImage" />
+                     <p>Team:  {playerInfo[0].team}</p>
+                     <p>SeasonYear:  {playerInfo[0].seasonYear}</p>
+                </div>
 
-if (playerInfo) {
-    const columns = prepareColumnsForTable();
-    const data = prepareDataForTable();
-    console.log("playerInfo:  ", playerInfo);
-    return (
-        <>
-            <div> Player Id:  { playerInfo[0].stats[0].playerId }
-                 <p>Name:  {playerInfo[0].stats[0].fullName}</p>
-                 <img src={playerInfo[0].stats[0].playerImage} alt="playerImage"/>
-                 <img src={playerInfo[0].stats[0].teamImage} alt="teamImage" />
-                 <p>Team:  {playerInfo[0].stats[0].team}</p>
-                 <p>SeasonYear:  {playerInfo[0].stats[0].seasonYear}</p>
-            </div>
+                <ReactTable data={data} columns={columns} styles={{styles}} defaultPageSize={data.length}/>
+            </>
+       )
+    } else {
+        return "No playerInfo"
+    }
+}
 
-            <ReactTable data={data} columns={columns} styles={{styles}} defaultPageSize={data.length}/>
-         </>
-    )
     // const stats = playerInfo[0].stats
     // return (
     //     <>
@@ -154,8 +175,8 @@ if (playerInfo) {
     //     }
     //     </>
    // )
-} else {
-    return "Loading..." }
-}
+// } else {
+//     return "Loading..." }
+//}
 
 export default Graph1;
