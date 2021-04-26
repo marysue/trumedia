@@ -33,7 +33,7 @@ const Graph1 = () => {
             <div style={{display: "flex"}}>
                     {stat.opponent} <img src={stat.opponentImage} style={{height:"40px"}} alt="opponentImage" />
                     </div>
-                    
+
 
                     const gameDate =  new Date(stat.gameDate);
                     const gameDateStr = (gameDate.getMonth() + 1) + "-" + gameDate.getDate() + "-" + gameDate.getFullYear();
@@ -89,8 +89,9 @@ const Graph1 = () => {
              <div>
                      <p style={{fontWeight: "bold"}}>Name:  {playerInfo[0].fullName}</p>
                      <img src={playerInfo[0].playerImage} alt="playerImage"/>
-                     <img src={playerInfo[0].teamImage} alt="teamImage" />
-                     <p style={{fontWeight: "bold"}}>Team:  {playerInfo[0].team}</p>
+
+                     <p style={{fontWeight: "bold"}}>Team:  {playerInfo[0].team}
+                     <img src={playerInfo[0].teamImage} alt="teamImage" /></p>
                      <p style={{fontWeight: "bold"}}>Season:  {playerInfo[0].seasonYear}</p>
                 </div>
 
