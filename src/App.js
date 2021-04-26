@@ -27,9 +27,9 @@ function App() {
   }, [dispatch, playerList]);
 
   if (!loaded) {
-    return "Not loaded...";
+    return null;
   } else if (!playerList) {
-    return "PlayerList is empty";
+    return null;
    } else  {
   return (
     <div className="App" style={{paddingBottom: "60px"}} >
