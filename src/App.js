@@ -32,9 +32,9 @@ function App() {
     return "PlayerList is empty";
    } else  {
   return (
-    <div className="App">
+    <div className="App" style={{paddingBottom: "60px"}} >
+      <NavigationHeader></NavigationHeader>
       <BrowserRouter>
-        <NavigationHeader></NavigationHeader>
           <Switch>
 
             <Route
@@ -47,8 +47,8 @@ function App() {
               render={ () => ( <Graph1 /> )}
             />
           </Switch>
-          <NavigationFooter></NavigationFooter>
         </BrowserRouter>
+        <NavigationFooter></NavigationFooter>
     </div>
   );
 }

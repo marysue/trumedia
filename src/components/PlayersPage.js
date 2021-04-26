@@ -9,27 +9,27 @@ const PlayersPage = () => {
     console.log("PlayersPage displaying.");
     if (players) {
     return(
-        players.map( (player) => {
-            return (
-                <>
-                    <div>
-                        <Link
-                            style={{textDecoration: "none" }}
-                            to={`/statistics/${player.playerId}`}
-                            key={player.playerId}
-                            >
-                            <img data-tip="Select player to view statistics" src={player.playerImage} alt={player.fullName}></img>
-                            <ReactTooltip />
-                        </Link>
-                        <p>{player.fullName}  <img src={player.teamImage} alt={player.teamImage} /></p>
-                    </div>
-                </>
-            )
-        })
 
+            players.map( (player) => {
+                return (
+                    <>
+                        <div key={player.playerId}>
+                            <Link
+                                style={{textDecoration: "none" }}
+                                to={`/statistics/${player.playerId}`}
+                                key={player.playerId}
+                                >
+                                <img data-tip="Select player to view statistics" src={player.playerImage} alt={player.fullName}></img>
+                                <ReactTooltip />
+                            </Link>
+                            <p>{player.fullName}  <img src={player.teamImage} alt={player.teamImage} /></p>
+                        </div>
+                    </>
+                )
+            })
     )
 
-}
+    }
 }
 
 export default PlayersPage;

@@ -8,9 +8,9 @@ const NavigationHeader = () => {
         <div>SOCCER</div>
         <div>CRICKET</div>
         <div>BASKETBALL</div>
-        <div><i class="fas fa-podcast fa-2x"></i></div>
-        <div><i class="fab fa-twitter fa-2x"></i></div>
-        <div><i class="far fa-envelope fa-2x"></i></div>
+        <div><i className="fas fa-podcast fa-2x"></i></div>
+        <div><i className="fab fa-twitter fa-2x"></i></div>
+        <div><i className="far fa-envelope fa-2x"></i></div>
     </div>
     )
 
