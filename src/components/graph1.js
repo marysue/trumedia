@@ -14,6 +14,7 @@ const Graph1 = () => {
     useEffect ( () => {
         (async () => {
             const response = await fetchPlayerStats(playerId);
+            console.log("PlayerInfo:  ", response);
             setPlayerInfo(response);
 
 
@@ -26,18 +27,18 @@ const Graph1 = () => {
         const stats = playerInfo
         let data = stats.map( (stat) => {
             const opponent =
-            <div style={{display: "flex"}}>
+                <div>
                     {stat.opponent} <img src={stat.opponentImage} style={{height:"40px"}} alt="opponentImage" />
-                    </div>
-
-
+                </div>
                     const gameDate =  new Date(stat.gameDate);
                     const gameDateStr = (gameDate.getMonth() + 1) + "-" + gameDate.getDate() + "-" + gameDate.getFullYear();
             return ({
 
                 week: stat.week,
                 date: gameDateStr,
-                opponent: opponent,
+                // opponent: opponent,
+                opponent: stat.opponent,
+                logo: <img src={stat.opponentImage} alt={stat.opponentImage} style={{height:"30px"}}/>,
                 ydsAtt: (stat.PsYds / stat.Att).toFixed(2),
                 complPct: (stat.Cmp / stat.Att).toFixed(2),
                 // attempts: stat.Att,
@@ -59,7 +60,19 @@ const Graph1 = () => {
         const columns = [
             { Header: 'Week', accessor: 'week'},
             { Header: 'Game Date', accessor: 'date' },
-            { Header: 'Opponent', accessor: 'opponent' },
+            { Header: 'Opponent',
+                width: 100,
+                Cell: props => {
+                    const { original } = props;
+                    const { opponent, logo } = original;
+                    return (
+                        <div style={{display: "inline-block", width: "100px"}}>
+                            <div>{opponent} {logo}</div>
+                        </div>
+                    );
+                }
+            },
+            // { Header: '', accessor: 'logo' },
             { Header:  'Yards/Attempt', accessor: 'ydsAtt'},
             { Header: 'Completion %', accessor: 'complPct'},
             // { Header: 'Attempts', accessor: 'attempts' },
@@ -95,7 +108,8 @@ const Graph1 = () => {
               style: {
                 height: '40px',
               },
-          })}style={{marginTop: "30px", width: "60%", marginLeft: "auto", marginRight: "auto"}} showPagination={false} data={data} columns={columns} styles={{styles}} defaultPageSize={data.length}/>
+          })}
+          style={{marginTop: "30px", width: "60%", marginLeft: "auto", marginRight: "auto"}} showPagination={false} data={data} columns={columns} styles={{styles}} defaultPageSize={data.length}/>
             </>
        )
     } else {

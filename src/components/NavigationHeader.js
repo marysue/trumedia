@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip';
 const NavigationHeader = () => {
     return (
         <>
-            <div style={{fontSize:"1.5em", paddingLeft: "20px", paddingRight: "20px", display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", height: "60px", backgroundColor: "#295a8e", color: "white", fontWeight: "bold" }}>
+            <div style={{marginLeft: "0px", marginRight:"0px", width: "100%", fontSize:"1.5em", paddingLeft: "40px", paddingRight: "40px", display: "flex", justifyContent: "space-between", alignItems: "center", width: "94%", height: "60px", backgroundColor: "#295a8e", color: "white", fontWeight: "bold" }}>
                 <div><a href="http://trumedianetworks.com/baseball">BASEBALL</a></div>
                 <div><a href="http://trumedianetworks.com/football">FOOTBALL</a></div>
                 <div><a href="http://trumedianetworks.com/soccer">SOCCER</a></div>
