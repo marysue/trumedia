@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import {  useDispatch  } from 'react-redux';
 import ReactTable from 'react-table-6';
 import styles from 'react-table-6/react-table.css';
 import { useLocation } from 'react-router-dom';
-import { fetchPlayerStats, setPlayerStats } from '../store/player';
-import { moment } from 'moment';
+import { fetchPlayerStats } from '../store/player'
 
 
 const Graph1 = () => {
