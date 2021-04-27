@@ -32,7 +32,6 @@ a {
 }
 
 .navHeader {
-  
   margin-left: "0px";
   margin-right:"0px";
   width: "100%";
@@ -46,8 +45,4 @@ a {
   background-color: "#295a8e";
   color: "white";
   font-weight: "bold";
-}
-
-.foo {
-  border-bottom:5px solid red;
 }
