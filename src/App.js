@@ -1,4 +1,5 @@
 import './App.css';
+import './index.css';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
@@ -32,7 +33,7 @@ function App() {
     return null;
    } else  {
   return (
-    <div className="App" style={{paddingBottom: "60px"}} >
+    <div className="App">
       <NavigationHeader></NavigationHeader>
       <BrowserRouter>
           <Switch>
