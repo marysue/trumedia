@@ -41,11 +41,11 @@ const Graph1 = () => {
                 logo: <img src={stat.opponentImage} alt={stat.opponentImage} style={{height:"30px"}}/>,
                 ydsAtt: (stat.PsYds / stat.Att).toFixed(2),
                 complPct: (stat.Cmp / stat.Att).toFixed(2),
-                // attempts: stat.Att,
-                // completions: stat.Cmp,
-                // interceptions: stat.Int,
-                // passingTouchdowns: stat.PsTD,
-                // passingYards: stat.PsYds,
+                attempts: stat.Att,
+                completions: stat.Cmp,
+                interceptions: stat.Int,
+                passingTouchdowns: stat.PsTD,
+                passingYards: stat.PsYds,
                 // rushingTouchdowns: stat.RshTD,
                 // rushingYards: stat.RshYds,
                 // rushes: stat.Rush,
@@ -72,14 +72,13 @@ const Graph1 = () => {
                     );
                 }
             },
-            // { Header: '', accessor: 'logo' },
             { Header:  'Yards/Attempt', accessor: 'ydsAtt'},
             { Header: 'Completion %', accessor: 'complPct'},
-            // { Header: 'Attempts', accessor: 'attempts' },
-            // { Header: 'Completions', accessor: 'completions' },
-            // { Header: 'Interceptions', accessor: 'interceptions' },
-            // { Header: 'Passing Touchdowns', accessor: 'passingTouchdowns' },
-            // { Header: 'Passing Yards', accessor: 'passingYards' },
+            { Header: 'Attempts', accessor: 'attempts' },
+            { Header: 'Completions', accessor: 'completions' },
+            { Header: 'Interceptions', accessor: 'interceptions' },
+            { Header: 'Passing Touchdowns', accessor: 'passingTouchdowns' },
+            { Header: 'Passing Yards', accessor: 'passingYards' },
             // { Header: 'Rushing Touchdowns', accessor: 'rushingTouchdowns'},
             // { Header: 'Rushing Yards', accessor: 'rushingYards'},
             // { Header: 'Rushes', accessor: 'rushes'},
@@ -109,7 +108,7 @@ const Graph1 = () => {
                 height: '40px',
               },
           })}
-          style={{marginTop: "30px", width: "60%", marginLeft: "auto", marginRight: "auto"}} showPagination={false} data={data} columns={columns} styles={{styles}} defaultPageSize={data.length}/>
+          style={{marginTop: "30px", width: "60%", marginLeft: "auto", marginRight: "auto", marginBottom: "60px"}} showPagination={false} data={data} columns={columns} styles={{styles}} defaultPageSize={data.length}/>
             </>
        )
     } else {
